@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!test</title>
+  </head>
+  <body>
+    <h1>Hello World!aaaaaa</h1>
+    <div id='example'></div>
+    <div id="demo">Drag Me</div>
+    <!-- All of the Node.js APIs are available in this renderer process. -->
+    We are using node <script>document.write(process.versions.node)</script>,
+    Chromium <script>document.write(process.versions.chrome)</script>,
+    and Electron <script>document.write(process.versions.electron)</script>.
+  </body>
+
+  <script>
+    var d3 = require('./d3.v3.min.js');
+    function createsvg () {
+      // id:exampleが指定されているタグ(ここではdivタグ)の下に、svgを追加します。
+      // widthとheightを指定します。
+      var svg = d3.select("#example").append("svg")
+          .attr({
+            width: 640,
+            height: 480,
+          });
+
+      // svgの下にcircleを追加します。
+      // cx,cy:中心座標(x,y)、r:半径を指定します。
+      svg.append('circle')
+        .attr({
+          'cx': 100,
+          'cy': 90,
+          'r': 20,
+        });
+    };
+    createsvg();
+
+    var YUI = require('yui').YUI;
+    YUI().use('dd-drag', function(Y) {
+        //Selector of the node to make draggable
+        var dd = new Y.DD.Drag({
+            node: '#demo'
+        });
+    });
+    // You can also require other files to run in this process
+    require('./renderer.js')
+  </script>
+</html>
